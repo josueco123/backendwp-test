@@ -1,0 +1,1 @@
+export const CARD_TOKEN="tok_test_32703_ec860d27454D080072E8f3118999c850";

@@ -1,11 +1,15 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
 import { CreateRideDto } from './dto/create-ride.dto';
 import { UpdateRideDto } from './dto/update-ride.dto';
+import { Ride } from './entities/ride.entity';
 
 @Injectable()
 export class RideService {
-  create(createRideDto: CreateRideDto) {
-    return 'This action adds a new ride';
+
+  constructor(@Inject('RIDE_REPOSITORY') private readonly rideRepository: typeof Ride) { }
+
+  async create(createRideDto: CreateRideDto): Promise<Ride> {
+    return await this.rideRepository.create<Ride>({...createRideDto})
   }
 
   findAll() {

@@ -6,7 +6,7 @@ import { Driver } from 'src/modules/driver/entities/driver.entity';
 export class Ride extends Model<Ride> {
     @Column({
         type: DataType.INTEGER,
-        allowNull: false,
+        autoIncrement: true,
         primaryKey: true
     })
     id: string;
@@ -40,7 +40,7 @@ export class Ride extends Model<Ride> {
 
     @Column({
         type: DataType.STRING,
-        allowNull: false,
+        allowNull: true,
     })
     time: string;
 

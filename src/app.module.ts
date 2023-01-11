@@ -6,8 +6,11 @@ import { ConfigModule } from '@nestjs/config';
 import { UserModule } from './modules/user/user.module';
 import { DriverModule } from './modules/driver/driver.module';
 import { RideModule } from './modules/ride/ride.module';
+import { PaymentModule } from './modules/payment/payment.module';
+
+
 @Module({
-  imports: [DatabaseModule, UserModule, DriverModule, RideModule,
+  imports: [DatabaseModule, UserModule, DriverModule, RideModule, PaymentModule,
     ConfigModule.forRoot({ isGlobal: true })
   ],
   controllers: [AppController],
