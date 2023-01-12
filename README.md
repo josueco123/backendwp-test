@@ -24,10 +24,19 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+This project was made with [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
 ## Installation
 
+For run this project you need:
+- Have installed node (I'm working with v18.12.1) 
+- Clone this repository with the command:
+```bash
+git clone https://github.com/josueco123/backendwp-test.git
+´´´
+- Create a postgres database and import the back up provided
+- Make a .env file in the main folder and add to this file your database configuration and all the keys for the api for payments, there are a .env.example for guide you to create this file
+- Download the all the packages used for this project with the command 
 ```bash
 $ npm install
 ```
