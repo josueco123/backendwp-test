@@ -24,7 +24,8 @@
 
 ## Description
 
-This project was made with [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+This project is a RESTful api for a small ride-handling service, was made with [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+
 
 ## Installation
 
