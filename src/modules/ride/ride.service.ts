@@ -1,7 +1,6 @@
 import { Injectable, Inject } from '@nestjs/common';
 import { User } from '../user/entities/user.entity';
 import { CreateRideDto } from './dto/create-ride.dto';
-import { UpdateRideDto } from './dto/update-ride.dto';
 import { Ride } from './entities/ride.entity';
 
 @Injectable()
