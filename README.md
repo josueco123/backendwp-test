@@ -71,7 +71,7 @@ $ npm run test:cov
 ## Stay in touch
 
 - Author - Josue Hurtado
-- LinkeedIn - [https://www.linkedin.com/in/josueco/](https://www.linkedin.com/in/josueco/)
+- LinkeedIn - [link](https://www.linkedin.com/in/josueco/)
 
 ## License
 
