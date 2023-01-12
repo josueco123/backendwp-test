@@ -26,11 +26,18 @@ export class User extends Model<User> {
         type: DataType.STRING,
         allowNull: false,
     })
-    latitude: string;
+    document_type: string;
 
     @Column({
         type: DataType.STRING,
         allowNull: false,
     })
-    longitude: string;
+    document_number: string;
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: true,
+    })
+    phone_number: string;
+
 }

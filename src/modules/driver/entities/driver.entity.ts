@@ -1,5 +1,4 @@
-import { Table, Column, Model, DataType, ForeignKey, BelongsTo } from 'sequelize-typescript';
-import { User } from 'src/modules/user/entities/user.entity';
+import { Table, Column, Model, DataType } from 'sequelize-typescript';
 
 @Table
 export class Driver extends Model<Driver>{
@@ -11,12 +10,11 @@ export class Driver extends Model<Driver>{
     })
     id: string;
 
-    @ForeignKey(() => User)
     @Column({
-        type: DataType.INTEGER,
+        type: DataType.STRING,
         allowNull: false,
     })
-    userId: number;
+    name: string;
 
     @Column({
         type: DataType.BOOLEAN,
@@ -24,6 +22,4 @@ export class Driver extends Model<Driver>{
     })
     avalible: boolean;
 
-    @BelongsTo(() => User)
-    user: User;
 }

@@ -1,34 +1,41 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete  } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { RideService } from './ride.service';
-import { CreateRideDto } from './dto/create-ride.dto';
-import { UpdateRideDto } from './dto/update-ride.dto';
+import { DriverService } from '../driver/driver.service';
 
-@Controller('ride')
+@Injectable()
 export class RideController {
-  constructor(private readonly rideService: RideService) {}
+  constructor(
+    private readonly rideService: RideService,
+    private readonly driverService: DriverService
+    ) {}
 
-  @Post()
-  create(@Body() createRideDto: CreateRideDto) {
-    return this.rideService.create(createRideDto);
+  async getDriverAvalible(){
+    const driver = await this.driverService.findDriverAvalible();
+    return driver.id;
   }
 
-  @Get()
-  findAll() {
-    return this.rideService.findAll();
+  async createRide(data) {
+    const driverId = parseInt(await this.getDriverAvalible());
+    const ride = {
+      userId: data.userId,
+      driverId: driverId,
+      finished: false,
+      distance: null,
+      price: null,
+      time: null,
+      latitud_start: data.latitud,
+      longitud_start: data.longitud,
+      latitud_end: null,
+      longitud_end: null
+    };
+    return this.rideService.create(ride);
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.rideService.findOne(+id);
+  calculatePrice(distance: number, time : number) : number {
+    const price = (distance*1000) + (time*200) > 3500 ? (distance * 1000) + (time*200) : 3500;
+    return price;
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateRideDto: UpdateRideDto) {
-    return this.rideService.update(+id, updateRideDto);
-  }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.rideService.remove(+id);
-  }
+ 
 }

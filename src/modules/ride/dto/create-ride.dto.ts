@@ -8,14 +8,23 @@ export class CreateRideDto {
     @IsNotEmpty()
     readonly driverId: number;
 
-    @IsNotEmpty()
-    readonly method_payment: string;
-
-    @IsNotEmpty()
+    readonly distance: number;
+    
     readonly price: number;
-
-    readonly time: string;
+  
+    readonly time: number;
 
     @IsNotEmpty()
     readonly finished: boolean;
+
+    @IsNotEmpty()
+    readonly latitud_start: string;
+
+    @IsNotEmpty()
+    readonly longitud_start: string;
+
+    readonly latitud_end: string;
+
+    readonly longitud_end: string;
+
 }

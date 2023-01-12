@@ -1,5 +1,4 @@
 import { Injectable, Inject } from '@nestjs/common';
-import { User } from '../user/entities/user.entity';
 import { CreateDriverDto } from './dto/create-driver.dto';
 import { UpdateDriverDto } from './dto/update-driver.dto';
 import { Driver } from './entities/driver.entity';
@@ -13,10 +12,9 @@ export class DriverService {
     return 'This action adds a new driver';
   }
 
-  async findDriversAvalibles() : Promise<Driver[]>{
-    return await this.driverRepository.findAll({
-      where:{ avalible: true },
-      include: [{ model: User, attributes: { exclude: ['id', 'createdAt', 'updatedAt'] }}]
+  async findDriverAvalible() : Promise<Driver>{
+    return await this.driverRepository.findOne({
+      where:{ avalible: true }
     })
   }
 

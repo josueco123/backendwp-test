@@ -19,7 +19,7 @@ export class DriverController {
 
   @Get('avalibles')
   findAvalibles() {
-    return this.driverService.findDriversAvalibles();
+    return "test";
   }
 
   @Get(':id')

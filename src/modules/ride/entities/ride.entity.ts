@@ -26,27 +26,50 @@ export class Ride extends Model<Ride> {
     driverId: number;
 
     @Column({
-        type: DataType.STRING,
-        unique: true,
-        allowNull: false,
-    })
-    method_payment: string;
-
-    @Column({
         type: DataType.INTEGER,
-        allowNull: false,
+        allowNull: true,
     })
     price: number;
 
     @Column({
-        type: DataType.STRING,
+        type: DataType.INTEGER,
         allowNull: true,
     })
-    time: string;
+    distance: number;
+
+    @Column({
+        type: DataType.INTEGER,
+        allowNull: true,
+    })
+    time: number;
 
     @Column({
         type: DataType.BOOLEAN,
         allowNull: false,
     })
     finished: boolean;
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+    })
+    latitud_start: string;
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: false,
+    })
+    longitud_start: string;
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: true,
+    })
+    latitud_end: string;
+
+    @Column({
+        type: DataType.STRING,
+        allowNull: true,
+    })
+    longitud_end: string;
 }
