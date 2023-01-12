@@ -1,4 +1,13 @@
-import { PartialType } from '@nestjs/mapped-types';
-import { CreateRideDto } from './create-ride.dto';
 
-export class UpdateRideDto extends PartialType(CreateRideDto) {}
+
+export class UpdateRideDto {
+
+    readonly finished: boolean;
+    readonly distance: number;
+    readonly price: number;
+    readonly time: number;
+    readonly latitud_end: number;
+    readonly longitud_end: number;
+
+
+}

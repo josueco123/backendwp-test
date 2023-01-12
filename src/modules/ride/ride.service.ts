@@ -16,12 +16,19 @@ export class RideService {
     return `This action returns all ride`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} ride`;
+  async findOne(id: number) {
+    return await this.rideRepository.findByPk(id);
   }
 
-  update(id: number, updateRideDto: UpdateRideDto) {
-    return `This action updates a #${id} ride`;
+  async update(id: number, data){
+    const [numberOfAffectedRows, [updatedRide]] = await this.rideRepository.update<Ride>({...data},{
+      where: {
+        id: id
+      },
+      returning: true
+    });
+
+    return { numberOfAffectedRows, updatedRide };
   }
 
   remove(id: number) {
