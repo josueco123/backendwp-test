@@ -86,6 +86,12 @@ export class PaymentService {
       async createSourcePayment (createSourcePaymentDto: CreateSourcePaymentDto) : Promise<SourcePayment>{
         return await this.paymentRepository.create<SourcePayment>({...createSourcePaymentDto});
       }
+
+      async findPaymentSourceByUserId(id) {
+        return await this.paymentRepository.findOne({
+          where: {userId: id }
+        });
+      }
 }
 
  

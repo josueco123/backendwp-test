@@ -1,4 +1,5 @@
 import { Injectable, Inject } from '@nestjs/common';
+import { User } from '../user/entities/user.entity';
 import { CreateRideDto } from './dto/create-ride.dto';
 import { UpdateRideDto } from './dto/update-ride.dto';
 import { Ride } from './entities/ride.entity';
@@ -17,7 +18,9 @@ export class RideService {
   }
 
   async findOne(id: number) {
-    return await this.rideRepository.findByPk(id);
+    return await this.rideRepository.findByPk(id,{
+      include: [{model : User}]
+    });
   }
 
   async update(id: number, data){

@@ -97,7 +97,6 @@ export class RideController {
       return updatedRide;
     }
 
-
   }
 
 

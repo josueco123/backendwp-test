@@ -1,10 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { PaymentService } from './payment.service';
+import { RideService } from '../ride/ride.service';
 
 @Injectable()
 export class PaymentController {
 
-  constructor(private readonly paymentService: PaymentService) {}
+  constructor(
+    private readonly paymentService: PaymentService,
+    private readonly rideService: RideService
+    ) {}
     
     async createSourceNequi (dataReq){
 
@@ -68,6 +72,67 @@ export class PaymentController {
 
     async listPaymets(){
       return this.paymentService.findAllPaymentSoruces();
+    }
+
+    generatedReference(){
+      const charts = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      let reference ="";
+      for (let i = 0; i < 15; i++) {
+        reference += charts.charAt(Math.floor(Math.random() * charts.length));
+      }
+
+     return reference;
+    }
+
+    async dataTransaction(id){
+
+      const reference = this.generatedReference();
+      const ride = await this.rideService.findOne(id);
+      const sourcePayment = await this.paymentService.findPaymentSourceByUserId(ride.userId);
+      const acceptance_token = await this.paymentService.getAceptedToken();
+      const payment_method = {
+        type: sourcePayment.type,
+        token: sourcePayment.token_wp,
+        installments: 1
+      }
+      const customer_data = {
+        phone_number: ride.user.phone_number,
+        full_name: ride.user.name,
+        legal_id: ride.user.document_number,
+        legal_id_type: ride.user.document_type
+      }
+      const shipping_address = {
+        address_line_1: "Calle 34 # 56 - 78",
+        address_line_2: "Apartamento 502, Torre I",
+        country: "CO",
+        region: "Cundinamarca",
+        city: "Bogotá",
+        name: ride.user.phone_number,
+        phone_number: ride.user.phone_number,
+        postal_code: "111111"
+      }
+      const dataTransaction = {
+        acceptance_token: acceptance_token,
+        amount_in_cents: ride.price,
+        currency: "COP",
+        payment_method: payment_method,
+        payment_source_id: parseInt(sourcePayment.sourceId),
+        redirect_url: "https://mitienda.com.co/pago/resultado",
+        reference: reference,
+        customer_data: customer_data,
+        shipping_address: shipping_address
+      }
+
+      return dataTransaction;
+
+    }
+
+    async createTransaction(id){
+
+      const dataTransaction = await this.dataTransaction(id);
+
+      return await this.paymentService.setTransaction(dataTransaction);
+      //return dataTransaction;
     }
 
 }

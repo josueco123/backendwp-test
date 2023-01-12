@@ -1,4 +1,4 @@
-import { Controller, Post, Req, Get, Res } from '@nestjs/common';
+import { Controller, Post, Req, Get, Res, Param } from '@nestjs/common';
 import { PaymentController } from './payment.controller';
 import { Request, Response } from 'express';
 
@@ -35,6 +35,17 @@ export class PaymentRoutes {
     @Get('Source')
     async getPaymentSource(){
         return await this.paymentController.listPaymets();
+    }
+
+    @Get('transaction/:id')
+    async setTransaction(@Param('id') id: string,  @Res() resp : Response){
+        try {
+            const response = await this.paymentController.createTransaction(id);
+            return resp.send({ mensaje: "Payment Source created successfully", data: response});
+        } catch (error) {
+            
+        }
+       
     }
 
 }

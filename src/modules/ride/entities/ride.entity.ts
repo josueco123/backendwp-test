@@ -1,4 +1,4 @@
-import { Table, Column, Model, DataType, ForeignKey } from 'sequelize-typescript';
+import { Table, Column, Model, DataType, ForeignKey, BelongsTo } from 'sequelize-typescript';
 import { User } from 'src/modules/user/entities/user.entity';
 import { Driver } from 'src/modules/driver/entities/driver.entity';
 
@@ -72,4 +72,7 @@ export class Ride extends Model<Ride> {
         allowNull: true,
     })
     longitud_end: string;
+
+    @BelongsTo(() => User)
+    user: User;
 }
